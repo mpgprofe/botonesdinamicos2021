@@ -10,13 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
     Button buttonCrear;
     EditText editTextNBotones;
     LinearLayout linearLayout;
 
-    Color dameColorAleatorio(){
-
+    int dameColorAleatorio() {
+        Random random = new Random();
+        return Color.argb(255, random.nextInt(256),
+                random.nextInt(256), random.nextInt(256));
     }
 
     @Override
@@ -26,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         buttonCrear = findViewById(R.id.buttonCrear);
         editTextNBotones = findViewById(R.id.editTextNBotones);
         linearLayout = findViewById(R.id.linearLayout);
-
-
 
 
         buttonCrear.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     b.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            view.setBackgroundColor(Color.RED);
+                            view.setBackgroundColor(dameColorAleatorio());
                         }
                     });
 
