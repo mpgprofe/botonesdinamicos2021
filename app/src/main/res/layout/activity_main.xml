@@ -30,5 +30,30 @@
             android:layout_height="wrap_content"
             android:text="Crear" />
 
+        <Button
+            android:id="@+id/buttonBorrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Borrar Todo" />
+
+        <Button
+            android:id="@+id/buttonBorrarPares"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Borrar Pares" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/gridLayoutTabla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:columnCount="4">
+
+            </androidx.gridlayout.widget.GridLayout>
+        </ScrollView>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

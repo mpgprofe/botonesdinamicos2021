@@ -1,6 +1,7 @@
 package com.example.botonesdinamicos2021;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.gridlayout.widget.GridLayout;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,12 +12,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    Button buttonCrear;
+    Button buttonCrear, buttonBorrar, buttonBorrarPares;
     EditText editTextNBotones;
-    LinearLayout linearLayout;
+    GridLayout layoutTabla;
 
     int dameColorAleatorio() {
         Random random = new Random();
@@ -30,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         buttonCrear = findViewById(R.id.buttonCrear);
         editTextNBotones = findViewById(R.id.editTextNBotones);
-        linearLayout = findViewById(R.id.linearLayout);
+        layoutTabla = findViewById(R.id.gridLayoutTabla);
+        buttonBorrar = findViewById(R.id.buttonBorrar);
+        buttonBorrarPares = findViewById(R.id.buttonBorrarPares);
 
 
         buttonCrear.setOnClickListener(new View.OnClickListener() {
@@ -41,18 +46,49 @@ public class MainActivity extends AppCompatActivity {
                     Button b = new Button(MainActivity.this);
                     b.setText("Botón " + i);
                     b.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    b.setBackgroundColor(dameColorAleatorio());
                     final int numero = i;
                     b.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             view.setBackgroundColor(dameColorAleatorio());
-                            Toast.makeText(MainActivity.this, "Soy el botón: "+numero, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Soy el botón: " + numero, Toast.LENGTH_SHORT).show();
                         }
                     });
 
-                    linearLayout.addView(b);
+                    layoutTabla.addView(b);
 
                 }
+            }
+        });
+
+        buttonBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layoutTabla.removeAllViews();
+            }
+        });
+
+        buttonBorrarPares.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<View> botones = layoutTabla.getTouchables();
+                Iterator<View> iterator = botones.iterator();
+
+
+                while (iterator.hasNext()) {
+                    View v = iterator.next();
+                    if (v instanceof Button) {
+                        String[] cadenas = ((Button) v).getText().toString().split(" ");
+                        int numero = Integer.parseInt(cadenas[1]);
+                        if (numero % 2 == 0) {
+                            layoutTabla.removeView(v);
+                        }
+
+                    }
+                }
+
+
             }
         });
 
