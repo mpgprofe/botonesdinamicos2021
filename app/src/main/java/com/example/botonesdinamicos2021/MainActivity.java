@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -40,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
                     Button b = new Button(MainActivity.this);
                     b.setText("Botón " + i);
                     b.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
+                    final int numero = i;
                     b.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             view.setBackgroundColor(dameColorAleatorio());
+                            Toast.makeText(MainActivity.this, "Soy el botón: "+numero, Toast.LENGTH_SHORT).show();
                         }
                     });
 
